@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Онлайн-школа Python | 14–25</title>
+  <meta name="description" content="Онлайн-курсы Python для 14–25 лет: практика, проекты, наставник, портфолио." />
+  <style>
+    :root{
+      --bg:#0f1510;
+      --card:#141d15;
+      --muted:#a8b3aa;
+      --text:#e8efe9;
+      --olive:#6b7f2e;
+      --olive2:#93a54b;
+      --border:rgba(255,255,255,.08);
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+      background: radial-gradient(1200px 600px at 15% 0%, rgba(147,165,75,.18), transparent 55%),
+                  radial-gradient(900px 500px at 85% 10%, rgba(107,127,46,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(160%) blur(10px);
+      background:rgba(15,21,16,.65);
+      border-bottom:1px solid var(--border);
+    }
+    .navin{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:14px}
+    .logo{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px}
+    .mark{width:34px; height:34px; border-radius:12px; background:linear-gradient(135deg, var(--olive2), var(--olive)); box-shadow:var(--shadow)}
+    .links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
+    .links a{color:var(--muted); font-weight:600; font-size:14px}
+    .links a:hover{color:var(--text)}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:11px 14px; border-radius:14px;
+      border:1px solid rgba(147,165,75,.35);
+      background:linear-gradient(135deg, rgba(147,165,75,.22), rgba(107,127,46,.22));
+      color:var(--text); font-weight:700; font-size:14px;
+      transition:.2s transform, .2s opacity;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{
+      border:1px solid rgba(147,165,75,.65);
+      background:linear-gradient(135deg, var(--olive2), var(--olive));
+      color:#0d120e;
+    }
+    .hero{padding:44px 0 26px}
+    .grid{display:grid; gap:18px}
+    @media(min-width:900px){ .grid{grid-template-columns:1.25fr .75fr} }
+    .hcard{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 55%), var(--card);
+      border-radius:var(--radius);
+      padding:26px;
+      box-shadow:var(--shadow);
+    }
+    h1{margin:0 0 10px; font-size:38px; line-height:1.05}
+    @media(max-width:520px){ h1{font-size:32px} }
+    .sub{color:var(--muted); font-size:16px; margin:0 0 16px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 0}
+    .badge{
+      font-size:13px; color:#dce6dd;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px; border-radius:999px;
+    }
+    .cards{display:grid; gap:14px; margin-top:14px}
+    .mini{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.02);
+      border-radius:16px;
+      padding:14px;
+    }
+    .mini b{display:block; margin-bottom:6px}
+    .section{padding:20px 0}
+    .secTitle{display:flex; align-items:end; justify-content:space-between; gap:12px; margin:0 0 10px}
+    .secTitle h2{margin:0; font-size:22px}
+    .secTitle p{margin:0; color:var(--muted); font-size:14px}
+    .three{display:grid; gap:14px}
+    @media(min-width:900px){ .three{grid-template-columns:repeat(3, 1fr)} }
+    .price{
+      display:grid; gap:14px;
+    }
+    @media(min-width:900px){ .price{grid-template-columns:repeat(3, 1fr)} }
+    .pCard{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(147,165,75,.10), transparent 55%), rgba(255,255,255,.02);
+      border-radius:18px;
+      padding:18px;
+    }
+    .pCard .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .tag{
+      font-size:12px; font-weight:800; letter-spacing:.4px;
+      background:rgba(147,165,75,.20); border:1px solid rgba(147,165,75,.35);
+      padding:6px 10px; border-radius:999px; color:#e8efe9;
+    }
+    .money{font-size:28px; margin:10px 0 8px; font-weight:900}
+    ul{margin:0; padding-left:18px; color:var(--muted)}
+    li{margin:6px 0}
+    .form{
+      display:grid; gap:10px;
+    }
+    .form input, .form textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+    }
+    .form input:focus, .form textarea:focus{border-color:rgba(147,165,75,.55)}
+    .foot{padding:28px 0 40px; color:var(--muted); border-top:1px solid var(--border); margin-top:18px}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .note{font-size:12px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap navin">
+      <div class="logo">
+        <div class="mark"></div>
+        <div>
+          <div>Python-школа</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;">14–25 лет • практические проекты</div>
+        </div>
+      </div>
+
+      <nav class="links">
+        <a href="#program">Программа</a>
+        <a href="#prices">Тарифы</a>
+        <a href="#results">Результаты</a>
+        <a href="#contact">Заявка</a>
+        <button class="btn primary" onclick="openWhatsApp()">Записаться</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap grid">
+        <div class="hcard">
+          <h1>Научим Python с нуля до проектов и портфолио</h1>
+          <p class="sub">Короткие уроки, много практики, наставник и проекты под реальную работу: боты, парсеры, мини-сервисы.</p>
+
+          <div class="row">
+            <button class="btn primary" onclick="scrollToId('contact')">Оставить заявку</button>
+            <button class="btn" onclick="scrollToId('program')">Посмотреть программу</button>
+          </div>
+
+          <div class="badges">
+            <div class="badge">2 занятия в неделю</div>
+            <div class="badge">Домашки с проверкой</div>
+            <div class="badge">Проект каждую ступень</div>
+            <div class="badge">Сертификат</div>
+          </div>
+        </div>
+
+        <aside class="hcard">
+          <div class="mini">
+            <b>Ближайший старт</b>
+            <div style="color:var(--muted)">Набор открыт • места ограничены</div>
+          </div>
+          <div class="cards">
+            <div class="mini">
+              <b>Для кого</b>
+              <div style="color:var(--muted)">14–25 лет • новички и те, кто хочет системно</div>
+            </div>
+            <div class="mini">
+              <b>Формат</b>
+              <div style="color:var(--muted)">Онлайн • запись уроков + живые разборы</div>
+            </div>
+            <div class="mini">
+              <b>Результат</b>
+              <div style="color:var(--muted)">Понимание основ + 2–4 проекта в портфолио</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="program">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>Программа обучения</h2>
+          <p>3 ступени — от базы до проектов</p>
+        </div>
+
+        <div class="three">
+          <div class="hcard">
+            <b>Ступень 1 — База</b>
+            <p style="color:var(--muted);margin:10px 0 0">Переменные, типы, условия, циклы, функции, списки/словари, файлы.</p>
+            <div class="badges" style="margin-top:14px">
+              <div class="badge">4 недели</div>
+              <div class="badge">Мини-проект</div>
+            </div>
+          </div>
+          <div class="hcard">
+            <b>Ступень 2 — Практика</b>
+            <p style="color:var(--muted);margin:10px 0 0">ООП, библиотеки, работа с API, ошибки, структура проекта, Git.</p>
+            <div class="badges" style="margin-top:14px">
+              <div class="badge">4–6 недель</div>
+              <div class="badge">Проект №1</div>
+            </div>
+          </div>
+          <div class="hcard">
+            <b>Ступень 3 — Портфолио</b>
+            <p style="color:var(--muted);margin:10px 0 0">Боты/парсинг/автоматизация, деплой, оформление портфолио.</p>
+            <div class="badges" style="margin-top:14px">
+              <div class="badge">4–6 недель</div>
+              <div class="badge">Проект №2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>Почему получается</h2>
+          <p>система + практика + обратная связь</p>
+        </div>
+
+        <div class="three">
+          <div class="hcard">
+            <b>Понятно и по шагам</b>
+            <p style="color:var(--muted);margin:10px 0 0">Каждая тема закрепляется задачами. Не “посмотрел и забыл”, а сделал руками.</p>
+          </div>
+          <div class="hcard">
+            <b>Наставник</b>
+            <p style="color:var(--muted);margin:10px 0 0">Проверка домашек и разбор ошибок. Помогаем довести проект до результата.</p>
+          </div>
+          <div class="hcard">
+            <b>Портфолио</b>
+            <p style="color:var(--muted);margin:10px 0 0">После курса остаются проекты, которые можно показать и использовать дальше.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="prices">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>Тарифы</h2>
+          <p>цены можно заменить на свои</p>
+        </div>
+
+        <div class="price">
+          <div class="pCard">
+            <div class="top">
+              <b>Старт</b>
+              <span class="tag">Самостоятельно</span>
+            </div>
+            <div class="money">₸ 29 000</div>
+            <ul>
+              <li>Доступ к урокам</li>
+              <li>Домашние задания</li>
+              <li>Чат студентов</li>
+            </ul>
+            <div style="margin-top:14px">
+              <button class="btn" onclick="scrollToId('contact')">Выбрать</button>
+            </div>
+          </div>
+
+          <div class="pCard" style="border-color:rgba(147,165,75,.45)">
+            <div class="top">
+              <b>Стандарт</b>
+              <span class="tag">С проверкой</span>
+            </div>
+            <div class="money">₸ 59 000</div>
+            <ul>
+              <li>Всё из “Старт”</li>
+              <li>Проверка домашек</li>
+              <li>Еженедельные разборы</li>
+            </ul>
+            <div style="margin-top:14px">
+              <button class="btn primary" onclick="scrollToId('contact')">Выбрать</button>
+            </div>
+          </div>
+
+          <div class="pCard">
+            <div class="top">
+              <b>Премиум</b>
+              <span class="tag">Наставник 1:1</span>
+            </div>
+            <div class="money">₸ 119 000</div>
+            <ul>
+              <li>Всё из “Стандарт”</li>
+              <li>Созвон 1:1 раз в неделю</li>
+              <li>Помощь с проектом/портфолио</li>
+            </ul>
+            <div style="margin-top:14px">
+              <button class="btn" onclick="scrollToId('contact')">Выбрать</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:10px">
+          *Цены/сроки — заглушки. Поменяем на твои реальные.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>Заявка</h2>
+          <p>оставь контакт — мы напишем</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns:1fr; gap:14px;">
+          <div class="hcard">
+            <form class="form" onsubmit="submitLead(event)">
+              <input id="name" placeholder="Имя" required />
+              <input id="phone" placeholder="Телефон / WhatsApp" required />
+              <input id="age" placeholder="Возраст (14–25)" inputmode="numeric" />
+              <textarea id="msg" rows="4" placeholder="Коротко: что хочешь научиться делать на Python?"></textarea>
+
+              <div class="row">
+                <button class="btn primary" type="submit">Отправить</button>
+                <button class="btn" type="button" onclick="openWhatsApp()">Написать в WhatsApp</button>
+                <button class="btn" type="button" onclick="openTelegram()">Написать в Telegram</button>
+              </div>
+
+              <div class="note">.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <div>© <span id="y"></span> Python-школа</div>
+        <div class="note"></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    function scrollToId(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+    }
+
+    // ВСТАВЬ СЮДА СВОИ КОНТАКТЫ:
+    const WHATSAPP_PHONE = "77000000000"; // пример: 77011234567 (без +)
+    const TELEGRAM_USER = "your_username"; // пример: knewit_school
+
+    function openWhatsApp(text){
+      const t = encodeURIComponent(text || "Привет! Хочу записаться на курс Python. Подскажите, пожалуйста, детали.");
+      window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${t}`, "_blank");
+    }
+
+    function openTelegram(){
+      window.open(`https://t.me/${TELEGRAM_USER}`, "_blank");
+    }
+
+    function submitLead(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+
+      const text =
+`Заявка на Python-школу:
+Имя: ${name}
+Телефон: ${phone}
+Возраст: ${age || "-"}
+Сообщение: ${msg || "-"}`;
+
+      // По умолчанию отправляем в WhatsApp
+      openWhatsApp(text);
+    }
+  </script>
+</body>
+</html>
