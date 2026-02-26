@@ -3,143 +3,204 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Онлайн-школа Айтишка </title>
+  <title>Онлайн-школа Айтишка</title>
   <meta name="description" content="Онлайн-курсы Python для 14–25 лет: практика, проекты, наставник, портфолио." />
+
   <style>
-   :root{
-  --bg:#f4f1ff;
-  --card:#ffffff;
-  --muted:#6b6b8a;
-  --text:#2b2b3c;
-  --olive:#7b5cff;
-  --olive2:#a78bfa;
-  --border:rgba(123,92,255,.15);
-  --shadow:0 12px 30px rgba(123,92,255,.15);
-}
-  
+    :root{
+      /* стиль под лого (голубой) */
+      --bg:#f6fbff;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+
+      --brand:#55c8ff;     /* основной голубой */
+      --brand2:#8be0ff;    /* светлее */
+      --brand3:#1aa7e6;    /* темнее для наведения */
+
+      --border:rgba(15, 23, 42, .10);
+      --shadow:0 14px 40px rgba(2, 132, 199, .16);
+
       --radius:18px;
       --max:1120px;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
-      background: radial-gradient(1200px 600px at 15% 0%, rgba(147,165,75,.18), transparent 55%),
-                  radial-gradient(900px 500px at 85% 10%, rgba(107,127,46,.18), transparent 55%),
-                  var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(900px 500px at 12% 0%, rgba(85,200,255,.22), transparent 55%),
+        radial-gradient(900px 500px at 88% 10%, rgba(139,224,255,.20), transparent 55%),
+        var(--bg);
       line-height:1.45;
     }
+
     a{color:inherit; text-decoration:none}
     .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+
+    /* NAV */
     .nav{
       position:sticky; top:0; z-index:50;
       backdrop-filter:saturate(160%) blur(10px);
-      background:rgba(15,21,16,.65);
+      background:rgba(255,255,255,.70);
       border-bottom:1px solid var(--border);
     }
-    .navin{display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:14px}
-    .logo{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px}
-    .mark{width:34px; height:34px; border-radius:12px; background:linear-gradient(135deg, var(--olive2), var(--olive)); box-shadow:var(--shadow)}
+    .navin{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0; gap:14px;
+    }
+
+    .logo{
+      display:flex; gap:12px; align-items:center;
+      font-weight:800;
+    }
+    .logo img{
+      width:40px; height:40px;
+      object-fit:contain;
+      border-radius:12px;
+      box-shadow:0 10px 24px rgba(2,132,199,.12);
+      background:#fff;
+    }
+    .logoTitle{line-height:1.1}
+    .logoTitle .name{font-size:16px}
+    .logoTitle .desc{font-size:12px; color:var(--muted); font-weight:700; margin-top:4px}
+
     .links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
-    .links a{color:var(--muted); font-weight:600; font-size:14px}
+    .links a{color:var(--muted); font-weight:700; font-size:14px}
     .links a:hover{color:var(--text)}
+
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px; border-radius:14px;
-      border:1px solid rgba(147,165,75,.35);
-      background:linear-gradient(135deg, rgba(147,165,75,.22), rgba(107,127,46,.22));
-      color:var(--text); font-weight:700; font-size:14px;
-      transition:.2s transform, .2s opacity;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid rgba(85,200,255,.35);
+      background:rgba(85,200,255,.10);
+      color:var(--text);
+      font-weight:800;
+      font-size:14px;
+      transition:.2s transform, .2s background, .2s border-color;
       cursor:pointer;
     }
-    .btn:hover{transform:translateY(-1px)}
+    .btn:hover{transform:translateY(-1px); border-color:rgba(85,200,255,.55)}
     .btn.primary{
-      border:1px solid rgba(147,165,75,.65);
-      background:linear-gradient(135deg, var(--olive2), var(--olive));
-      color:#0d120e;
+      border:1px solid rgba(85,200,255,.65);
+      background:linear-gradient(135deg, var(--brand2), var(--brand));
+      color:#062235;
     }
+    .btn.primary:hover{background:linear-gradient(135deg, var(--brand), var(--brand3))}
+
+    /* LAYOUT */
     .hero{padding:44px 0 26px}
     .grid{display:grid; gap:18px}
     @media(min-width:900px){ .grid{grid-template-columns:1.25fr .75fr} }
+
     .hcard{
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 55%), var(--card);
+      background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.95));
       border-radius:var(--radius);
       padding:26px;
       box-shadow:var(--shadow);
     }
+
     h1{margin:0 0 10px; font-size:38px; line-height:1.05}
     @media(max-width:520px){ h1{font-size:32px} }
     .sub{color:var(--muted); font-size:16px; margin:0 0 16px}
+
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+
     .badges{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 0}
     .badge{
-      font-size:13px; color:#dce6dd;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.03);
-      padding:8px 10px; border-radius:999px;
+      font-size:13px;
+      color:#0b2a3a;
+      border:1px solid rgba(85,200,255,.35);
+      background:rgba(85,200,255,.10);
+      padding:8px 10px;
+      border-radius:999px;
+      font-weight:800;
     }
+
     .cards{display:grid; gap:14px; margin-top:14px}
     .mini{
       border:1px solid var(--border);
-      background:rgba(255,255,255,.02);
+      background:#ffffff;
       border-radius:16px;
       padding:14px;
     }
     .mini b{display:block; margin-bottom:6px}
-    .section{padding:20px 0}
+    .mini div{color:var(--muted)}
+
+    .section{padding:22px 0}
     .secTitle{display:flex; align-items:end; justify-content:space-between; gap:12px; margin:0 0 10px}
     .secTitle h2{margin:0; font-size:22px}
     .secTitle p{margin:0; color:var(--muted); font-size:14px}
+
     .three{display:grid; gap:14px}
     @media(min-width:900px){ .three{grid-template-columns:repeat(3, 1fr)} }
-    .price{
-      display:grid; gap:14px;
-    }
+
+    /* PRICES */
+    .price{display:grid; gap:14px}
     @media(min-width:900px){ .price{grid-template-columns:repeat(3, 1fr)} }
+
     .pCard{
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(147,165,75,.10), transparent 55%), rgba(255,255,255,.02);
+      background:#ffffff;
       border-radius:18px;
       padding:18px;
+      box-shadow:0 10px 26px rgba(2,132,199,.08);
     }
     .pCard .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
     .tag{
-      font-size:12px; font-weight:800; letter-spacing:.4px;
-      background:rgba(147,165,75,.20); border:1px solid rgba(147,165,75,.35);
-      padding:6px 10px; border-radius:999px; color:#e8efe9;
+      font-size:12px; font-weight:900; letter-spacing:.3px;
+      background:rgba(85,200,255,.14);
+      border:1px solid rgba(85,200,255,.35);
+      padding:6px 10px;
+      border-radius:999px;
+      color:#0b2a3a;
     }
-    .money{font-size:28px; margin:10px 0 8px; font-weight:900}
+    .money{font-size:28px; margin:10px 0 8px; font-weight:1000}
     ul{margin:0; padding-left:18px; color:var(--muted)}
     li{margin:6px 0}
-    .form{
-      display:grid; gap:10px;
-    }
+
+    /* FORM */
+    .form{display:grid; gap:10px}
     .form input, .form textarea{
       width:100%;
       padding:12px 12px;
       border-radius:14px;
       border:1px solid var(--border);
-      background:rgba(0,0,0,.25);
+      background:#ffffff;
       color:var(--text);
       outline:none;
     }
-    .form input:focus, .form textarea:focus{border-color:rgba(147,165,75,.55)}
-    .foot{padding:28px 0 40px; color:var(--muted); border-top:1px solid var(--border); margin-top:18px}
-    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .form input:focus, .form textarea:focus{
+      border-color:rgba(85,200,255,.75);
+      box-shadow:0 0 0 4px rgba(85,200,255,.20);
+    }
+
+    .foot{
+      padding:28px 0 40px;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      margin-top:18px;
+    }
     .note{font-size:12px; color:var(--muted)}
   </style>
 </head>
+
 <body>
   <header class="nav">
     <div class="wrap navin">
-      <div class="https://drive.google.com/drive/folders/1uA-Eg-eSEH0Od4fNRiqiLJ3YS3DkLWxt?huid=QK681gU5ykPfCMRosiFFIw&sort=13&direction=a">
-        <div class="mark"></div>
-        <div>
-          <div>Айтишка</div>
-          <div style="font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;">14–25 лет • практические проекты</div>
+
+      <!-- ЛОГО -->
+      <a class="logo" href="#top" aria-label="Айтишка">
+        <img src="assets/logo.png" alt="Айтишка — школа программирования">
+        <div class="logoTitle">
+          <div class="name">Айтишка</div>
+          <div class="desc">14–25 лет • практические проекты</div>
         </div>
-      </div>
+      </a>
 
       <nav class="links">
         <a href="#program">Программа</a>
@@ -151,7 +212,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="wrap grid">
         <div class="hcard">
@@ -173,20 +234,20 @@
         <aside class="hcard">
           <div class="mini">
             <b>Ближайший старт</b>
-            <div style="color:var(--muted)">Набор открыт • места ограничены</div>
+            <div>Набор открыт • места ограничены</div>
           </div>
           <div class="cards">
             <div class="mini">
               <b>Для кого</b>
-              <div style="color:var(--muted)">14–25 лет • новички и те, кто хочет системно</div>
+              <div>14–25 лет • новички и те, кто хочет системно</div>
             </div>
             <div class="mini">
               <b>Формат</b>
-              <div style="color:var(--muted)">Онлайн • запись уроков + живые разборы</div>
+              <div>Онлайн • запись уроков + живые разборы</div>
             </div>
             <div class="mini">
               <b>Результат</b>
-              <div style="color:var(--muted)">Понимание основ + 2–4 проекта в портфолио</div>
+              <div>Понимание основ + 2–4 проекта в портфолио</div>
             </div>
           </div>
         </aside>
@@ -209,6 +270,7 @@
               <div class="badge">Мини-проект</div>
             </div>
           </div>
+
           <div class="hcard">
             <b>Ступень 2 — Практика</b>
             <p style="color:var(--muted);margin:10px 0 0">ООП, библиотеки, работа с API, ошибки, структура проекта, Git.</p>
@@ -217,6 +279,7 @@
               <div class="badge">Проект №1</div>
             </div>
           </div>
+
           <div class="hcard">
             <b>Ступень 3 — Портфолио</b>
             <p style="color:var(--muted);margin:10px 0 0">Боты/парсинг/автоматизация, деплой, оформление портфолио.</p>
@@ -277,7 +340,7 @@
             </div>
           </div>
 
-          <div class="pCard" style="border-color:rgba(147,165,75,.45)">
+          <div class="pCard" style="border-color:rgba(85,200,255,.55)">
             <div class="top">
               <b>Стандарт</b>
               <span class="tag">С проверкой</span>
@@ -337,7 +400,7 @@
                 <button class="btn" type="button" onclick="openTelegram()">Написать в Telegram</button>
               </div>
 
-              <div class="note">.</div>
+              <div class="note">Нажимая “Отправить”, ты просто откроешь WhatsApp с готовым текстом заявки.</div>
             </form>
           </div>
         </div>
@@ -346,8 +409,8 @@
 
     <footer class="foot">
       <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div>© <span id="y"></span> Айтишка </div>
-        <div class="note"></div>
+        <div>© <span id="y"></span> Айтишка</div>
+        <div class="note">Сделано на GitHub Pages</div>
       </div>
     </footer>
   </main>
@@ -380,13 +443,12 @@
       const msg = document.getElementById('msg').value.trim();
 
       const text =
-`Заявка на Python-школу:
+`Заявка на Айтишка (Python):
 Имя: ${name}
 Телефон: ${phone}
 Возраст: ${age || "-"}
 Сообщение: ${msg || "-"}`;
 
-      // По умолчанию отправляем в WhatsApp
       openWhatsApp(text);
     }
   </script>
