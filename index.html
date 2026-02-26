@@ -2,455 +2,736 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Онлайн-школа Айтишка</title>
-  <meta name="description" content="Профессиональный онлайн-курс Python для 14–25 лет: практика с первого занятия, проекты для портфолио и сопровождение наставника" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Айтишка — курсы Python (14–25 лет)</title>
+  <meta name="description" content="Айтишка: онлайн-курсы Python для 14–25 лет. Практика, проекты, наставник, портфолио. Запишитесь на бесплатную консультацию." />
+  <meta name="format-detection" content="telephone=no" />
 
   <style>
     :root{
-      /* стиль под лого (голубой) */
-      --bg:#f6fbff;
+      --bg:#f4f1ff;
       --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-
-      --brand:#55c8ff;     /* основной голубой */
-      --brand2:#8be0ff;    /* светлее */
-      --brand3:#1aa7e6;    /* темнее для наведения */
-
-      --border:rgba(15, 23, 42, .10);
-      --shadow:0 14px 40px rgba(2, 132, 199, .16);
-
+      --muted:#6b6b8a;
+      --text:#2b2b3c;
+      --primary:#7b5cff;
+      --primary2:#a78bfa;
+      --border:rgba(123,92,255,.15);
+      --shadow:0 12px 30px rgba(123,92,255,.18);
       --radius:18px;
       --max:1120px;
     }
-
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
       color:var(--text);
-      background:
-        radial-gradient(900px 500px at 12% 0%, rgba(85,200,255,.22), transparent 55%),
-        radial-gradient(900px 500px at 88% 10%, rgba(139,224,255,.20), transparent 55%),
-        var(--bg);
       line-height:1.45;
     }
+    a{color:inherit}
+    .container{max-width:var(--max); margin:0 auto; padding:0 16px;}
 
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
-
-    /* NAV */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(160%) blur(10px);
-      background:rgba(255,255,255,.70);
+    /* Header */
+    .header{
+      position:sticky; top:0; z-index:1000;
+      background:rgba(244,241,255,.88);
+      backdrop-filter: blur(10px);
       border-bottom:1px solid var(--border);
     }
-    .navin{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px;
+    .header__row{
+      height:76px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+    .brand__logo{
+      width:42px;height:42px;border-radius:14px;
+      background:linear-gradient(135deg,var(--primary),var(--primary2));
+      box-shadow:var(--shadow);
+      display:grid; place-items:center;
+      color:#fff; font-weight:900;
+      user-select:none;
+    }
+    .brand__name{font-weight:900; letter-spacing:.2px;}
+    .brand__sub{display:block; font-size:12px; color:var(--muted); margin-top:-2px;}
 
-    .logo{
-      display:flex; gap:12px; align-items:center;
-      font-weight:800;
+    .nav{display:flex; gap:6px; align-items:center;}
+    .nav a{
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:14px;
+      color:var(--text);
     }
-    .logo img{
-      width:40px; height:40px;
-      object-fit:contain;
-      border-radius:12px;
-      box-shadow:0 10px 24px rgba(2,132,199,.12);
-      background:#fff;
-    }
-    .logoTitle{line-height:1.1}
-    .logoTitle .name{font-size:16px}
-    .logoTitle .desc{font-size:12px; color:var(--muted); font-weight:700; margin-top:4px}
+    .nav a:hover{background:rgba(123,92,255,.10);}
 
-    .links{display:flex; gap:14px; align-items:center; flex-wrap:wrap}
-    .links a{color:var(--muted); font-weight:700; font-size:14px}
-    .links a:hover{color:var(--text)}
+    .header__right{display:flex; align-items:center; gap:10px;}
+    .phone{display:flex; flex-direction:column; line-height:1.2; text-align:right;}
+    .phone a{color:var(--text); text-decoration:none; font-weight:900;}
+    .phone small{color:var(--muted); font-size:12px;}
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:11px 14px;
+      border:0; cursor:pointer;
+      font-weight:900;
+      padding:12px 16px;
       border-radius:14px;
-      border:1px solid rgba(85,200,255,.35);
-      background:rgba(85,200,255,.10);
-      color:var(--text);
-      font-weight:800;
-      font-size:14px;
-      transition:.2s transform, .2s background, .2s border-color;
-      cursor:pointer;
+      background:var(--primary);
+      color:#fff;
+      box-shadow:var(--shadow);
+      transition:.15s transform, .15s opacity, .15s background;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      text-decoration:none;
+      white-space:nowrap;
     }
-    .btn:hover{transform:translateY(-1px); border-color:rgba(85,200,255,.55)}
-    .btn.primary{
-      border:1px solid rgba(85,200,255,.65);
-      background:linear-gradient(135deg, var(--brand2), var(--brand));
-      color:#062235;
-    }
-    .btn.primary:hover{background:linear-gradient(135deg, var(--brand), var(--brand3))}
-
-    /* LAYOUT */
-    .hero{padding:44px 0 26px}
-    .grid{display:grid; gap:18px}
-    @media(min-width:900px){ .grid{grid-template-columns:1.25fr .75fr} }
-
-    .hcard{
+    .btn:hover{transform:translateY(-1px); opacity:.95;}
+    .btn--ghost{
+      background:transparent; color:var(--text); box-shadow:none;
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.95));
+    }
+    .burger{display:none; width:44px; height:44px; padding:0; border-radius:14px;}
+
+    @media (max-width: 920px){
+      .nav{display:none;}
+      .phone{display:none;}
+      .burger{display:inline-flex;}
+    }
+
+    /* Hero */
+    .hero{padding:44px 0 18px;}
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero__grid{grid-template-columns:1fr;}
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
       border-radius:var(--radius);
-      padding:26px;
       box-shadow:var(--shadow);
     }
-
-    h1{margin:0 0 10px; font-size:38px; line-height:1.05}
-    @media(max-width:520px){ h1{font-size:32px} }
-    .sub{color:var(--muted); font-size:16px; margin:0 0 16px}
-
-    .row{display:flex; gap:10px; flex-wrap:wrap}
-
-    .badges{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 0}
-    .badge{
-      font-size:13px;
-      color:#0b2a3a;
-      border:1px solid rgba(85,200,255,.35);
-      background:rgba(85,200,255,.10);
-      padding:8px 10px;
+    .hero__left{padding:26px;}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px;
       border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(123,92,255,.08);
+      color:var(--text);
       font-weight:800;
+      font-size:13px;
     }
-
-    .cards{display:grid; gap:14px; margin-top:14px}
-    .mini{
+    h1{margin:14px 0 10px; font-size:42px; line-height:1.05;}
+    @media (max-width: 520px){h1{font-size:34px;}}
+    .lead{color:var(--muted); font-size:16px; margin:0 0 16px;}
+    .hero__cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+    .chips{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+    .chip{
+      background:rgba(123,92,255,.08);
       border:1px solid var(--border);
-      background:#ffffff;
-      border-radius:16px;
-      padding:14px;
-    }
-    .mini b{display:block; margin-bottom:6px}
-    .mini div{color:var(--muted)}
-
-    .section{padding:22px 0}
-    .secTitle{display:flex; align-items:end; justify-content:space-between; gap:12px; margin:0 0 10px}
-    .secTitle h2{margin:0; font-size:22px}
-    .secTitle p{margin:0; color:var(--muted); font-size:14px}
-
-    .three{display:grid; gap:14px}
-    @media(min-width:900px){ .three{grid-template-columns:repeat(3, 1fr)} }
-
-    /* PRICES */
-    .price{display:grid; gap:14px}
-    @media(min-width:900px){ .price{grid-template-columns:repeat(3, 1fr)} }
-
-    .pCard{
-      border:1px solid var(--border);
-      background:#ffffff;
-      border-radius:18px;
-      padding:18px;
-      box-shadow:0 10px 26px rgba(2,132,199,.08);
-    }
-    .pCard .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
-    .tag{
-      font-size:12px; font-weight:900; letter-spacing:.3px;
-      background:rgba(85,200,255,.14);
-      border:1px solid rgba(85,200,255,.35);
-      padding:6px 10px;
       border-radius:999px;
-      color:#0b2a3a;
+      padding:10px 12px;
+      font-weight:800;
+      font-size:13px;
+      color:var(--text);
     }
-    .money{font-size:28px; margin:10px 0 8px; font-weight:1000}
-    ul{margin:0; padding-left:18px; color:var(--muted)}
-    li{margin:6px 0}
 
-    /* FORM */
-    .form{display:grid; gap:10px}
-    .form input, .form textarea{
-      width:100%;
+    /* Right side info card */
+    .hero__right{padding:18px;}
+    .hero__right h3{margin:6px 0 10px; font-size:18px;}
+    .list{margin:0; padding:0; list-style:none; display:grid; gap:10px;}
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:12px;
+      border-radius:14px;
+      background:rgba(123,92,255,.06);
+      border:1px solid var(--border);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background:var(--primary);
+      margin-top:5px;
+      box-shadow:0 0 0 4px rgba(123,92,255,.12);
+      flex:0 0 auto;
+    }
+    .li b{display:block; margin-bottom:2px;}
+    .li span{color:var(--muted); font-size:13px;}
+
+    /* Sections */
+    section{padding:26px 0;}
+    .section__head{display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:14px;}
+    .section__head h2{margin:0; font-size:28px;}
+    .section__head p{margin:0; color:var(--muted);}
+
+    .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+    @media (max-width: 900px){.grid3{grid-template-columns:1fr;}}
+    .mini{padding:16px;}
+    .mini h3{margin:6px 0 8px; font-size:18px;}
+    .mini p{margin:0; color:var(--muted);}
+
+    /* Syllabus */
+    .syllabus{display:grid; gap:10px;}
+    details{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 8px 22px rgba(123,92,255,.10);
+      overflow:hidden;
+    }
+    summary{
+      padding:14px 16px;
+      cursor:pointer;
+      list-style:none;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      font-weight:900;
+    }
+    summary::-webkit-details-marker{display:none;}
+    .caret{
+      width:10px;height:10px;border-right:2px solid var(--primary);border-bottom:2px solid var(--primary);
+      transform:rotate(45deg);
+      transition:.2s transform;
+      margin-right:4px;
+    }
+    details[open] .caret{transform:rotate(-135deg);}
+    .details__body{padding:0 16px 14px; color:var(--muted);}
+
+    /* Reviews */
+    .reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+    @media (max-width: 900px){.reviews{grid-template-columns:1fr;}}
+    .quote{padding:16px;}
+    .quote p{margin:0 0 10px; color:var(--text);}
+    .quote small{color:var(--muted); font-weight:800;}
+
+    /* Footer */
+    footer{padding:26px 0 40px;}
+    .footer__box{
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .footer__box small{color:var(--muted);}
+
+    /* Drawer (mobile menu) */
+    .drawer{position:fixed; inset:0; z-index:1200; display:none;}
+    .drawer.is-open{display:block;}
+    .drawer__bg{position:absolute; inset:0; background:rgba(15,10,30,.45);}
+    .drawer__panel{
+      position:absolute; right:0; top:0; height:100%; width:min(360px, 92vw);
+      background:var(--card);
+      border-left:1px solid var(--border);
+      box-shadow:-20px 0 60px rgba(0,0,0,.12);
+      padding:16px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .drawer__panel a{
+      text-decoration:none;
       padding:12px 12px;
       border-radius:14px;
-      border:1px solid var(--border);
-      background:#ffffff;
-      color:var(--text);
-      outline:none;
+      font-weight:900;
     }
-    .form input:focus, .form textarea:focus{
-      border-color:rgba(85,200,255,.75);
-      box-shadow:0 0 0 4px rgba(85,200,255,.20);
-    }
+    .drawer__panel a:hover{background:rgba(123,92,255,.10);}
 
-    .foot{
-      padding:28px 0 40px;
-      color:var(--muted);
-      border-top:1px solid var(--border);
-      margin-top:18px;
+    /* Modal form */
+    .modal{position:fixed; inset:0; display:none; z-index:1300;}
+    .modal.is-open{display:block;}
+    .modal__bg{position:absolute; inset:0; background:rgba(15,10,30,.55);}
+    .modal__card{
+      position:relative;
+      max-width:560px;
+      margin:8vh auto;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:18px;
     }
-    .note{font-size:12px; color:var(--muted)}
+    .modal__top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+    .modal__title{margin:0; font-size:22px; font-weight:1000;}
+    .iconbtn{border:0; background:transparent; cursor:pointer; font-size:22px; padding:8px; border-radius:12px;}
+    .iconbtn:hover{background:rgba(123,92,255,.10);}
+
+    .form{margin-top:12px; display:grid; gap:10px;}
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      outline:none;
+      background:#fff;
+      color:var(--text);
+      font-weight:600;
+    }
+    .input:focus{
+      border-color:rgba(123,92,255,.55);
+      box-shadow:0 0 0 4px rgba(123,92,255,.14);
+    }
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    @media (max-width: 520px){.row{grid-template-columns:1fr;}}
+    .radios{display:flex; gap:10px; flex-wrap:wrap;}
+    .radio{
+      display:flex; align-items:center; gap:8px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      cursor:pointer;
+      user-select:none;
+      font-weight:800;
+      background:rgba(123,92,255,.06);
+    }
+    .small{color:var(--muted); font-size:13px; line-height:1.55;}
+    .small a{color:var(--primary); text-decoration:none; font-weight:900;}
+
+    /* Toast */
+    .toast{
+      position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:900;
+      display:none;
+      z-index:1400;
+    }
+    .toast.show{display:block;}
   </style>
 </head>
 
 <body>
-  <header class="nav">
-    <div class="wrap navin">
 
-      <!-- ЛОГО -->
-      <a class="logo" href="#top" aria-label="Айтишка">
-        <img src="assets/logo.png" alt="Айтишка — школа программирования">
-        <div class="logoTitle">
-          <div class="name">Айтишка</div>
-          <div class="desc">14–25 лет • практические проекты</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header__row">
+        <a class="brand" href="#top">
+          <!-- ЛОГО: если есть картинка, замени блок ниже на:
+               <img src="logo.png" alt="Айтишка" style="width:42px;height:42px;border-radius:14px;object-fit:cover;box-shadow:var(--shadow)" />
+          -->
+          <div class="brand__logo" aria-hidden="true">A</div>
+          <div>
+            <div class="brand__name">Айтишка</div>
+            <span class="brand__sub">Python 14–25 лет • Онлайн</span>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Навигация">
+          <a href="#prof">О школе</a>
+          <a href="#dly">Для кого</a>
+          <a href="#syllabus">Программа</a>
+          <a href="#otz">Отзывы</a>
+          <a href="#sertif">Сертификат</a>
+        </nav>
+
+        <div class="header__right">
+          <div class="phone">
+            <a href="tel:+77000000000">+7 700 000 00 00</a>
+            <small>WhatsApp / Telegram</small>
+          </div>
+
+          <button class="btn btn--ghost burger" type="button" id="openDrawer" aria-label="Открыть меню">☰</button>
+          <button class="btn" type="button" id="openModal">Записаться</button>
         </div>
-      </a>
-
-      <nav class="links">
-        <a href="#program">Программа</a>
-        <a href="#prices">Тарифы</a>
-        <a href="#results">Результаты</a>
-        <a href="#contact">Заявка</a>
-        <button class="btn primary" onclick="openWhatsApp()">Записаться</button>
-      </nav>
+      </div>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="wrap grid">
-        <div class="hcard">
-          <h1>Python с нуля до реальных IT-проектов и первого портфолио</h1>
-          <p class="sub">Короткие уроки, много практики, наставник и проекты под реальную работу: боты, парсеры, мини-сервисы.</p>
+  <!-- Drawer -->
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer__bg" id="closeDrawer"></div>
+    <div class="drawer__panel">
+      <button class="btn btn--ghost" type="button" id="closeDrawerBtn">Закрыть</button>
+      <a href="#prof" class="drawerLink">О школе</a>
+      <a href="#dly" class="drawerLink">Для кого</a>
+      <a href="#syllabus" class="drawerLink">Программа</a>
+      <a href="#otz" class="drawerLink">Отзывы</a>
+      <a href="#sertif" class="drawerLink">Сертификат</a>
+      <button class="btn" type="button" id="openModal2">Записаться</button>
+      <a class="btn btn--ghost" href="tel:+77000000000">Позвонить</a>
+    </div>
+  </div>
 
-          <div class="row">
-            <button class="btn primary" onclick="scrollToId('contact')">Оставить заявку</button>
-            <button class="btn" onclick="scrollToId('program')">Посмотреть программу</button>
+  <!-- Hero -->
+  <main id="top" class="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div class="card hero__left">
+          <div class="kicker">🚀 Старт с нуля → уверенный Python</div>
+          <h1>Айтишка: курсы Python<br>для 14–25 лет</h1>
+          <p class="lead">
+            Учимся на практике: задачи, мини-проекты и поддержка наставника.
+            Результат — портфолио и уверенная база, чтобы расти дальше.
+          </p>
+
+          <div class="hero__cta">
+            <button class="btn" type="button" id="openModal3">Бесплатная консультация</button>
+            <a class="btn btn--ghost" href="#syllabus">Смотреть программу</a>
           </div>
 
-          <div class="badges">
-            <div class="badge">2 занятия в неделю</div>
-            <div class="badge">Проверка домашней работы куратором</div>
-            <div class="badge">Сертификат</div>
+          <div class="chips">
+            <div class="chip">✅ 80% практика</div>
+            <div class="chip">✅ Проекты в портфолио</div>
+            <div class="chip">✅ Наставник и чат</div>
+            <div class="chip">✅ Уроки + домашки</div>
           </div>
         </div>
 
-        <aside class="hcard">
-          <div class="mini">
-            <b>Ближайший старт</b>
-            <div>Набор открыт • места ограничены</div>
-          </div>
-          <div class="cards">
-            <div class="mini">
-              <b>Для кого</b>
-              <div>14–25 лет • новички и те, кто хочет системно</div>
-            </div>
-            <div class="mini">
-              <b>Формат</b>
-              <div>Онлайн • запись уроков + живые разборы</div>
-            </div>
-            <div class="mini">
-              <b>Результат</b>
-              <div>Понимание основ + 2–4 проекта в портфолио</div>
-            </div>
+        <aside class="card hero__right">
+          <h3>Что вы получите</h3>
+          <ul class="list">
+            <li class="li">
+              <div class="dot"></div>
+              <div><b>Понятная база</b><span>синтаксис, типы данных, функции, ООП</span></div>
+            </li>
+            <li class="li">
+              <div class="dot"></div>
+              <div><b>Проектное обучение</b><span>мини-проекты и финальный проект</span></div>
+            </li>
+            <li class="li">
+              <div class="dot"></div>
+              <div><b>План развития</b><span>как продолжать после курса (Django/боты/данные)</span></div>
+            </li>
+          </ul>
+
+          <div style="margin-top:14px;">
+            <div class="small"><b>Формат:</b> онлайн • 2–3 занятия в неделю</div>
+            <div class="small"><b>Поддержка:</b> чат + проверка домашних</div>
+            <div class="small"><b>Возраст:</b> 14–25 лет</div>
           </div>
         </aside>
       </div>
-    </section>
-
-    <section class="section" id="program">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>Программа обучения</h2>
-          <p>1 этап — от базы до проектов</p>
-        </div>
-
-        <div class="three">
-          <div class="hcard">
-            <b>Первый этап — База</b>
-            <p style="color:var(--muted);margin:10px 0 0">Переменные, типы, условия, циклы, функции, списки/словари, файлы.</p>
-            <div class="badges" style="margin-top:14px">
-              <div class="badge">4 недели</div>
-              <div class="badge">Мини-проект</div>
-            </div>
-          </div>
-
-          <div class="hcard">
-            <b>Второй этап — Практика</b>
-            <p style="color:var(--muted);margin:10px 0 0">ООП, библиотеки, работа с API, ошибки, структура проекта, Git.</p>
-            <div class="badges" style="margin-top:14px">
-              <div class="badge">4–6 недель</div>
-              <div class="badge">Проект №1</div>
-            </div>
-          </div>
-
-          <div class="hcard">
-            <b>Третий этап — Портфолио</b>
-            <p style="color:var(--muted);margin:10px 0 0">Боты/парсинг/автоматизация, деплой, оформление портфолио.</p>
-            <div class="badges" style="margin-top:14px">
-              <div class="badge">4–6 недель</div>
-              <div class="badge">Проект №2</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="results">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>Почему получается</h2>
-          <p>система + практика + обратная связь</p>
-        </div>
-
-        <div class="three">
-          <div class="hcard">
-            <b>Понятно и по шагам</b>
-            <p style="color:var(--muted);margin:10px 0 0">Каждая тема закрепляется задачами. Не “посмотрел и забыл”, а сделал руками.</p>
-          </div>
-          <div class="hcard">
-            <b>Наставник</b>
-            <p style="color:var(--muted);margin:10px 0 0">Проверка домашек и разбор ошибок. Помогаем довести проект до результата.</p>
-          </div>
-          <div class="hcard">
-            <b>Портфолио</b>
-            <p style="color:var(--muted);margin:10px 0 0">После курса остаются проекты, которые можно показать и использовать дальше.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="prices">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>Тарифы</h2>
-          <p>цены можно заменить на свои</p>
-        </div>
-
-        <div class="price">
-          <div class="pCard">
-            <div class="top">
-              <b>Старт</b>
-              <span class="tag">Самостоятельно</span>
-            </div>
-            <div class="money">₸ 15 000</div>
-            <ul>
-              <li>Доступ к урокам</li>
-              <li>Домашние задания</li>
-              <li>Чат студентов</li>
-            </ul>
-            <div style="margin-top:14px">
-              <button class="btn" onclick="scrollToId('contact')">Выбрать</button>
-            </div>
-          </div>
-
-          <div class="pCard" style="border-color:rgba(85,200,255,.55)">
-            <div class="top">
-              <b>Стандарт</b>
-              <span class="tag">С проверкой</span>
-            </div>
-            <div class="money">₸ 40 000</div>
-            <ul>
-              <li>Всё из “Старт”</li>
-              <li>Проверка домашней работы</li>
-              <li>Еженедельные разборы</li>
-            </ul>
-            <div style="margin-top:14px">
-              <button class="btn primary" onclick="scrollToId('contact')">Выбрать</button>
-            </div>
-          </div>
-
-          <div class="pCard">
-            <div class="top">
-              <b>Премиум</b>
-              <span class="tag">Наставник 1:1</span>
-            </div>
-            <div class="money">₸ 80 000</div>
-            <ul>
-              <li>Всё из “Стандарт”</li>
-              <li>Созвон 1:1 раз в неделю</li>
-              <li>Помощь с проектом/портфолио</li>
-            </ul>
-            <div style="margin-top:14px">
-              <button class="btn" onclick="scrollToId('contact')">Выбрать</button>
-            </div>
-          </div>
-        </div>
-
-        <p class="note" style="margin-top:10px">
-        
-        </p>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="wrap">
-        <div class="secTitle">
-          <h2>Заявка</h2>
-          <p>оставь контакт — мы напишем</p>
-        </div>
-
-        <div class="grid" style="grid-template-columns:1fr; gap:14px;">
-          <div class="hcard">
-            <form class="form" onsubmit="submitLead(event)">
-              <input id="name" placeholder="Имя" required />
-              <input id="phone" placeholder="Телефон / WhatsApp" required />
-              <input id="age" placeholder="Возраст (14–25)" inputmode="numeric" />
-              <textarea id="msg" rows="4" placeholder="Коротко: что хочешь научиться делать на Python?"></textarea>
-
-              <div class="row">
-                <button class="btn primary" type="submit">Отправить</button>
-                <button class="btn" type="button" onclick="openWhatsApp()">Написать в WhatsApp</button>
-                <button class="btn" type="button" onclick="openTelegram()">Написать в Telegram</button>
-              </div>
-
-              <div class="note">Нажимая “Отправить”, ты просто откроешь WhatsApp с готовым текстом заявки.</div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="foot">
-      <div class="wrap" style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
-        <div>© <span id="y"></span> Айтишка</div>
-        <div class="note">Сделано на GitHub Pages</div>
-      </div>
-    </footer>
+    </div>
   </main>
 
+  <!-- About -->
+  <section id="prof">
+    <div class="container">
+      <div class="section__head">
+        <h2>О школе</h2>
+        <p>Коротко и по делу</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card mini">
+          <div class="kicker">📌</div>
+          <h3>Без воды</h3>
+          <p>Объясняем простым языком и сразу закрепляем практикой.</p>
+        </div>
+        <div class="card mini">
+          <div class="kicker">🧩</div>
+          <h3>По шагам</h3>
+          <p>От самых основ до уверенных мини-проектов и портфолио.</p>
+        </div>
+        <div class="card mini">
+          <div class="kicker">🤝</div>
+          <h3>Поддержка</h3>
+          <p>Наставник помогает, отвечает и направляет по ошибкам.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For who -->
+  <section id="dly">
+    <div class="container">
+      <div class="section__head">
+        <h2>Для кого курс</h2>
+        <p>Подходит, если ты…</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card mini">
+          <h3>Новичок</h3>
+          <p>Никогда не программировал — начнём с нуля и без стресса.</p>
+        </div>
+        <div class="card mini">
+          <h3>Хочешь навык</h3>
+          <p>Нужен Python для учебы, проектов, олимпиад или работы.</p>
+        </div>
+        <div class="card mini">
+          <h3>Хочешь результат</h3>
+          <p>Доведём до проектов, чтобы было что показать и куда расти дальше.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Syllabus -->
+  <section id="syllabus">
+    <div class="container">
+      <div class="section__head">
+        <h2>Программа обучения</h2>
+        <p>Пример модулей (можно менять под твой план)</p>
+      </div>
+
+      <div class="syllabus">
+        <details open>
+          <summary><span>Модуль 1 — старт и база</span><span class="caret"></span></summary>
+          <div class="details__body">
+            Переменные, типы данных, ввод/вывод, условия, циклы, функции. Практика на задачах.
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Модуль 2 — структуры данных</span><span class="caret"></span></summary>
+          <div class="details__body">
+            Списки, словари, множества, строки. Алгоритмическое мышление + тренировка.
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Модуль 3 — ООП и проекты</span><span class="caret"></span></summary>
+          <div class="details__body">
+            Классы, объекты, методы. Мини-проекты и оформление портфолио.
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Модуль 4 — финальный проект</span><span class="caret"></span></summary>
+          <div class="details__body">
+            Финальный проект по выбору: бот, мини-сервис, игра или парсер. Подготовка к презентации.
+          </div>
+        </details>
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" type="button" id="openModal4">Хочу программу под себя</button>
+        <a class="btn btn--ghost" href="#form">Оставить заявку</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="otz">
+    <div class="container">
+      <div class="section__head">
+        <h2>Отзывы студентов</h2>
+        <p>Примеры (замени на реальные)</p>
+      </div>
+
+      <div class="reviews">
+        <div class="card quote">
+          <p>«Стало понятно, как думать как программист. Понравилось, что много практики.»</p>
+          <small>— Алина, 16 лет</small>
+        </div>
+        <div class="card quote">
+          <p>«Сделал мини-проект и наконец понял циклы/функции. Круто!»</p>
+          <small>— Артём, 19 лет</small>
+        </div>
+        <div class="card quote">
+          <p>«Наставник реально помогал. Теперь хочу дальше изучать Django.»</p>
+          <small>— Диана, 21 год</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificate -->
+  <section id="sertif">
+    <div class="container">
+      <div class="section__head">
+        <h2>Сертификат</h2>
+        <p>После прохождения курса</p>
+      </div>
+
+      <div class="card mini">
+        <h3>Выдаём сертификат</h3>
+        <p>После выполнения финального проекта и сдачи домашних заданий.</p>
+        <div style="margin-top:12px;">
+          <button class="btn" type="button" id="openModal5">Узнать детали</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form anchor -->
+  <section id="form">
+    <div class="container">
+      <div class="section__head">
+        <h2>Записаться</h2>
+        <p>Оставь контакты — мы свяжемся</p>
+      </div>
+
+      <div class="card" style="padding:18px;">
+        <form class="form" id="leadForm">
+          <div class="row">
+            <input class="input" name="name" placeholder="Фамилия Имя" required />
+            <input class="input" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+          </div>
+          <input class="input" name="email" type="email" placeholder="example@gmail.com" required />
+          <input class="input" name="promocode" placeholder="Промокод (если есть)" />
+
+          <div class="small"><b>Как с вами связаться?</b></div>
+          <div class="radios">
+            <label class="radio">
+              <input type="radio" name="communication_method" value="по телефону" checked />
+              по телефону
+            </label>
+            <label class="radio">
+              <input type="radio" name="communication_method" value="в Telegram" />
+              в Telegram
+            </label>
+          </div>
+
+          <button class="btn" type="submit">Отправить заявку</button>
+          <div class="small">
+            Нажимая кнопку, вы соглашаетесь с
+            <a href="/privacy" target="_blank" rel="noreferrer noopener">политикой обработки данных</a>.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="card footer__box">
+        <div>
+          <div style="font-weight:1000;">Айтишка</div>
+          <small>© <span id="year"></span> • Курсы Python • Казахстан</small>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn--ghost" href="tel:+77000000000">Позвонить</a>
+          <a class="btn" href="#form">Записаться</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal (popup) -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__bg" id="closeModal"></div>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-label="Записаться на консультацию">
+      <div class="modal__top">
+        <h3 class="modal__title">Бесплатная консультация</h3>
+        <button class="iconbtn" type="button" id="closeModalBtn" aria-label="Закрыть">✕</button>
+      </div>
+
+      <form class="form" id="modalForm">
+        <input class="input" name="name" placeholder="Фамилия Имя" required />
+        <div class="row">
+          <input class="input" type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
+          <input class="input" type="email" name="email" placeholder="example@gmail.com" required />
+        </div>
+        <input class="input" name="promocode" placeholder="Промокод (если есть)" />
+
+        <div class="small"><b>Как с вами связаться?</b></div>
+        <div class="radios">
+          <label class="radio">
+            <input type="radio" name="communication_method" value="по телефону" checked />
+            по телефону
+          </label>
+          <label class="radio">
+            <input type="radio" name="communication_method" value="в Telegram" />
+            в Telegram
+          </label>
+        </div>
+
+        <button class="btn" type="submit">Отправить заявку</button>
+        <div class="small">
+          Нажимая кнопку, вы соглашаетесь с
+          <a href="/privacy" target="_blank" rel="noreferrer noopener">политикой обработки данных</a>.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Спасибо! Заявка отправлена ✅</div>
+
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    function scrollToId(id){
-      document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'});
+    // Drawer
+    const drawer = document.getElementById('drawer');
+    const openDrawerBtn = document.getElementById('openDrawer');
+    const closeDrawerBg = document.getElementById('closeDrawer');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+    function openDrawer(){
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer(){
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
     }
 
-    // ВСТАВЬ СЮДА СВОИ КОНТАКТЫ:
-    const WHATSAPP_PHONE = "77000000000"; // пример: 77011234567 (без +)
-    const TELEGRAM_USER = "your_username"; // пример: knewit_school
+    openDrawerBtn && openDrawerBtn.addEventListener('click', openDrawer);
+    closeDrawerBg && closeDrawerBg.addEventListener('click', closeDrawer);
+    closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawerLink').forEach(a => a.addEventListener('click', closeDrawer));
 
-    function openWhatsApp(text){
-      const t = encodeURIComponent(text || "Привет! Хочу записаться на курс Python. Подскажите, пожалуйста, детали.");
-      window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${t}`, "_blank");
+    // Modal
+    const modal = document.getElementById('modal');
+    const openModalBtns = [
+      document.getElementById('openModal'),
+      document.getElementById('openModal2'),
+      document.getElementById('openModal3'),
+      document.getElementById('openModal4'),
+      document.getElementById('openModal5'),
+    ].filter(Boolean);
+
+    const closeModalBg = document.getElementById('closeModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    function openModal(){
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
     }
 
-    function openTelegram(){
-      window.open(`https://t.me/${TELEGRAM_USER}`, "_blank");
+    openModalBtns.forEach(btn => btn.addEventListener('click', () => {
+      closeDrawer();
+      openModal();
+    }));
+    closeModalBg && closeModalBg.addEventListener('click', closeModal);
+    closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){ closeModal(); closeDrawer(); }
+    });
+
+    // Toast helper
+    const toast = document.getElementById('toast');
+    function showToast(text){
+      toast.textContent = text || 'Готово ✅';
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2600);
     }
 
-    function submitLead(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const age = document.getElementById('age').value.trim();
-      const msg = document.getElementById('msg').value.trim();
+    // Submit (placeholder) - тут можно подключить Telegram/CRM/Sheets
+    function handleSubmit(form){
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        console.log('Lead:', data);
 
-      const text =
-`Заявка на Айтишка (Python):
-Имя: ${name}
-Телефон: ${phone}
-Возраст: ${age || "-"}
-Сообщение: ${msg || "-"}`;
-
-      openWhatsApp(text);
+        form.reset();
+        closeModal();
+        showToast('Спасибо! Заявка отправлена ✅');
+      });
     }
+
+    const leadForm = document.getElementById('leadForm');
+    const modalForm = document.getElementById('modalForm');
+    if(leadForm) handleSubmit(leadForm);
+    if(modalForm) handleSubmit(modalForm);
   </script>
 </body>
 </html>
