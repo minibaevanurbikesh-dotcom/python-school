@@ -647,91 +647,147 @@
   <div class="toast" id="toast">Спасибо! Заявка отправлена ✅</div>
 
   <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // ==== НАСТРОЙКА: твой Web App URL (Google Apps Script) ====
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxChnUfiKGniHmondp2SIuqBZZfTDMkDh-RRHv9VnpGS2y9bxlh63J6fAgWdkkufH5V/exec";
 
-    // Drawer
-    const drawer = document.getElementById('drawer');
-    const openDrawerBtn = document.getElementById('openDrawer');
-    const closeDrawerBg = document.getElementById('closeDrawer');
-    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    function openDrawer(){
-      drawer.classList.add('is-open');
-      drawer.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer(){
-      drawer.classList.remove('is-open');
-      drawer.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
+  // Drawer
+  const drawer = document.getElementById('drawer');
+  const openDrawerBtn = document.getElementById('openDrawer');
+  const closeDrawerBg = document.getElementById('closeDrawer');
+  const closeDrawerBtn = document.getElementById('closeDrawerBtn');
 
-    openDrawerBtn && openDrawerBtn.addEventListener('click', openDrawer);
-    closeDrawerBg && closeDrawerBg.addEventListener('click', closeDrawer);
-    closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
-    document.querySelectorAll('.drawerLink').forEach(a => a.addEventListener('click', closeDrawer));
+  function openDrawer(){
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
 
-    // Modal
-    const modal = document.getElementById('modal');
-    const openModalBtns = [
-      document.getElementById('openModal'),
-      document.getElementById('openModal2'),
-      document.getElementById('openModal3'),
-      document.getElementById('openModal4'),
-      document.getElementById('openModal5'),
-    ].filter(Boolean);
+  openDrawerBtn && openDrawerBtn.addEventListener('click', openDrawer);
+  closeDrawerBg && closeDrawerBg.addEventListener('click', closeDrawer);
+  closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
+  document.querySelectorAll('.drawerLink').forEach(a => a.addEventListener('click', closeDrawer));
 
-    const closeModalBg = document.getElementById('closeModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
+  // Modal
+  const modal = document.getElementById('modal');
+  const openModalBtns = [
+    document.getElementById('openModal'),
+    document.getElementById('openModal2'),
+    document.getElementById('openModal3'),
+    document.getElementById('openModal4'),
+    document.getElementById('openModal5'),
+  ].filter(Boolean);
 
-    function openModal(){
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal(){
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
+  const closeModalBg = document.getElementById('closeModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
 
-    openModalBtns.forEach(btn => btn.addEventListener('click', () => {
-      closeDrawer();
-      openModal();
-    }));
-    closeModalBg && closeModalBg.addEventListener('click', closeModal);
-    closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
+  function openModal(){
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
 
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape'){ closeModal(); closeDrawer(); }
+  openModalBtns.forEach(btn => btn.addEventListener('click', () => {
+    closeDrawer();
+    openModal();
+  }));
+  closeModalBg && closeModalBg.addEventListener('click', closeModal);
+  closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){ closeModal(); closeDrawer(); }
+  });
+
+  // Toast helper
+  const toast = document.getElementById('toast');
+  function showToast(text){
+    toast.textContent = text || 'Готово ✅';
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), 2600);
+  }
+
+  // ====== ОТПРАВКА В GOOGLE SHEETS ======
+  function formToObject(form){
+    const fd = new FormData(form);
+    const obj = {};
+    fd.forEach((v, k) => obj[k] = String(v).trim());
+    return obj;
+  }
+
+  async function sendToSheets(payload){
+    // Важно: Apps Script часто требует text/plain чтобы не ловить preflight CORS
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors", // чтобы браузер не блокировал из-за CORS
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
     });
 
-    // Toast helper
-    const toast = document.getElementById('toast');
-    function showToast(text){
-      toast.textContent = text || 'Готово ✅';
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'), 2600);
-    }
+    // mode:no-cors => res будет "opaque", статусы не читаются — это нормально
+    return true;
+  }
 
-    // Submit (placeholder) - тут можно подключить Telegram/CRM/Sheets
-    function handleSubmit(form){
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(form).entries());
-        console.log('Lead:', data);
+  function setLoading(form, isLoading){
+    const btn = form.querySelector('button[type="submit"]');
+    if(!btn) return;
+
+    if(isLoading){
+      btn.dataset.oldText = btn.textContent;
+      btn.textContent = "Отправляю...";
+      btn.disabled = true;
+      btn.style.opacity = "0.8";
+    } else {
+      btn.textContent = btn.dataset.oldText || "Отправить заявку";
+      btn.disabled = false;
+      btn.style.opacity = "";
+    }
+  }
+
+  function handleSubmit(form){
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = formToObject(form);
+
+      // добавим тех. поля
+      const payload = {
+        ...data,
+        page: location.href,
+        ts: new Date().toISOString()
+      };
+
+      try{
+        setLoading(form, true);
+        await sendToSheets(payload);
 
         form.reset();
         closeModal();
         showToast('Спасибо! Заявка отправлена ✅');
-      });
-    }
+      }catch(err){
+        console.error(err);
+        showToast('Ошибка отправки ❌');
+      }finally{
+        setLoading(form, false);
+      }
+    });
+  }
 
-    const leadForm = document.getElementById('leadForm');
-    const modalForm = document.getElementById('modalForm');
-    if(leadForm) handleSubmit(leadForm);
-    if(modalForm) handleSubmit(modalForm);
-  </script>
+  const leadForm = document.getElementById('leadForm');
+  const modalForm = document.getElementById('modalForm');
+  if(leadForm) handleSubmit(leadForm);
+  if(modalForm) handleSubmit(modalForm);
+</script>
 </body>
 </html>
