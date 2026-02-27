@@ -312,9 +312,6 @@
     <div class="container">
       <div class="header__row">
         <a class="brand" href="#top">
-          <!-- ЛОГО: если есть картинка, замени блок ниже на:
-               <img src="logo.png" alt="Айтишка" style="width:42px;height:42px;border-radius:14px;object-fit:cover;box-shadow:var(--shadow)" />
-          -->
           <div class="brand__logo" aria-hidden="true">A</div>
           <div>
             <div class="brand__name">Айтишка</div>
@@ -332,8 +329,8 @@
 
         <div class="header__right">
           <div class="phone">
-            <a href="tel:+77000000000">+7 700 000 00 00</a>
-            <small>WhatsApp / Telegram</small>
+            <a href="https://wa.me/77000000000" target="_blank" rel="noreferrer noopener">WhatsApp</a>
+            <small>Написать в WhatsApp</small>
           </div>
 
           <button class="btn btn--ghost burger" type="button" id="openDrawer" aria-label="Открыть меню">☰</button>
@@ -354,7 +351,7 @@
       <a href="#otz" class="drawerLink">Отзывы</a>
       <a href="#sertif" class="drawerLink">Сертификат</a>
       <button class="btn" type="button" id="openModal2">Записаться</button>
-      <a class="btn btn--ghost" href="tel:+77000000000">Позвонить</a>
+      <a class="btn btn--ghost" href="https://wa.me/77000000000" target="_blank" rel="noreferrer noopener">WhatsApp</a>
     </div>
   </div>
 
@@ -563,22 +560,13 @@
         <form class="form" id="leadForm">
           <div class="row">
             <input class="input" name="name" placeholder="Фамилия Имя" required />
-            <input class="input" name="phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+            <input class="input" name="phone" type="tel" placeholder="WhatsApp номер: +7 (___) ___-__-__" required />
           </div>
           <input class="input" name="email" type="email" placeholder="example@gmail.com" required />
           <input class="input" name="promocode" placeholder="Промокод (если есть)" />
 
-          <div class="small"><b>Как с вами связаться?</b></div>
-          <div class="radios">
-            <label class="radio">
-              <input type="radio" name="communication_method" value="по телефону" checked />
-              по телефону
-            </label>
-            <label class="radio">
-              <input type="radio" name="communication_method" value="в Telegram" />
-              в Telegram
-            </label>
-          </div>
+          <!-- фиксируем способ связи -->
+          <input type="hidden" name="communication_method" value="WhatsApp" />
 
           <button class="btn" type="submit">Отправить заявку</button>
           <div class="small">
@@ -599,7 +587,7 @@
           <small>© <span id="year"></span> • Курсы Python • Казахстан</small>
         </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn btn--ghost" href="tel:+77000000000">Позвонить</a>
+          <a class="btn btn--ghost" href="https://wa.me/77000000000" target="_blank" rel="noreferrer noopener">WhatsApp</a>
           <a class="btn" href="#form">Записаться</a>
         </div>
       </div>
@@ -618,22 +606,13 @@
       <form class="form" id="modalForm">
         <input class="input" name="name" placeholder="Фамилия Имя" required />
         <div class="row">
-          <input class="input" type="tel" name="phone" placeholder="+7 (___) ___-__-__" required />
+          <input class="input" type="tel" name="phone" placeholder="WhatsApp номер: +7 (___) ___-__-__" required />
           <input class="input" type="email" name="email" placeholder="example@gmail.com" required />
         </div>
         <input class="input" name="promocode" placeholder="Промокод (если есть)" />
 
-        <div class="small"><b>Как с вами связаться?</b></div>
-        <div class="radios">
-          <label class="radio">
-            <input type="radio" name="communication_method" value="по телефону" checked />
-            по телефону
-          </label>
-          <label class="radio">
-            <input type="radio" name="communication_method" value="в Telegram" />
-            в Telegram
-          </label>
-        </div>
+        <!-- фиксируем способ связи -->
+        <input type="hidden" name="communication_method" value="WhatsApp" />
 
         <button class="btn" type="submit">Отправить заявку</button>
         <div class="small">
@@ -647,147 +626,140 @@
   <div class="toast" id="toast">Спасибо! Заявка отправлена ✅</div>
 
   <script>
-  // ==== НАСТРОЙКА: твой Web App URL (Google Apps Script) ====
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxChnUfiKGniHmondp2SIuqBZZfTDMkDh-RRHv9VnpGS2y9bxlh63J6fAgWdkkufH5V/exec";
+    // ==== НАСТРОЙКА: твой Web App URL (Google Apps Script) ====
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwzFY74yrRs1u9ZkXJvN1BxZFsySKsfwplx3IMrsEbcwfOzstHTuHwVnpZWWsPGBOOi/exec";
 
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Drawer
-  const drawer = document.getElementById('drawer');
-  const openDrawerBtn = document.getElementById('openDrawer');
-  const closeDrawerBg = document.getElementById('closeDrawer');
-  const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    // Drawer
+    const drawer = document.getElementById('drawer');
+    const openDrawerBtn = document.getElementById('openDrawer');
+    const closeDrawerBg = document.getElementById('closeDrawer');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
 
-  function openDrawer(){
-    drawer.classList.add('is-open');
-    drawer.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDrawer(){
-    drawer.classList.remove('is-open');
-    drawer.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  openDrawerBtn && openDrawerBtn.addEventListener('click', openDrawer);
-  closeDrawerBg && closeDrawerBg.addEventListener('click', closeDrawer);
-  closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
-  document.querySelectorAll('.drawerLink').forEach(a => a.addEventListener('click', closeDrawer));
-
-  // Modal
-  const modal = document.getElementById('modal');
-  const openModalBtns = [
-    document.getElementById('openModal'),
-    document.getElementById('openModal2'),
-    document.getElementById('openModal3'),
-    document.getElementById('openModal4'),
-    document.getElementById('openModal5'),
-  ].filter(Boolean);
-
-  const closeModalBg = document.getElementById('closeModal');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-
-  function openModal(){
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(){
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-
-  openModalBtns.forEach(btn => btn.addEventListener('click', () => {
-    closeDrawer();
-    openModal();
-  }));
-  closeModalBg && closeModalBg.addEventListener('click', closeModal);
-  closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
-
-  document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape'){ closeModal(); closeDrawer(); }
-  });
-
-  // Toast helper
-  const toast = document.getElementById('toast');
-  function showToast(text){
-    toast.textContent = text || 'Готово ✅';
-    toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'), 2600);
-  }
-
-  // ====== ОТПРАВКА В GOOGLE SHEETS ======
-  function formToObject(form){
-    const fd = new FormData(form);
-    const obj = {};
-    fd.forEach((v, k) => obj[k] = String(v).trim());
-    return obj;
-  }
-
-  async function sendToSheets(payload){
-    // Важно: Apps Script часто требует text/plain чтобы не ловить preflight CORS
-    const res = await fetch(WEB_APP_URL, {
-      method: "POST",
-      mode: "no-cors", // чтобы браузер не блокировал из-за CORS
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(payload)
-    });
-
-    // mode:no-cors => res будет "opaque", статусы не читаются — это нормально
-    return true;
-  }
-
-  function setLoading(form, isLoading){
-    const btn = form.querySelector('button[type="submit"]');
-    if(!btn) return;
-
-    if(isLoading){
-      btn.dataset.oldText = btn.textContent;
-      btn.textContent = "Отправляю...";
-      btn.disabled = true;
-      btn.style.opacity = "0.8";
-    } else {
-      btn.textContent = btn.dataset.oldText || "Отправить заявку";
-      btn.disabled = false;
-      btn.style.opacity = "";
+    function openDrawer(){
+      drawer.classList.add('is-open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
     }
-  }
+    function closeDrawer(){
+      drawer.classList.remove('is-open');
+      drawer.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
 
-  function handleSubmit(form){
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    openDrawerBtn && openDrawerBtn.addEventListener('click', openDrawer);
+    closeDrawerBg && closeDrawerBg.addEventListener('click', closeDrawer);
+    closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
+    document.querySelectorAll('.drawerLink').forEach(a => a.addEventListener('click', closeDrawer));
 
-      const data = formToObject(form);
+    // Modal
+    const modal = document.getElementById('modal');
+    const openModalBtns = [
+      document.getElementById('openModal'),
+      document.getElementById('openModal2'),
+      document.getElementById('openModal3'),
+      document.getElementById('openModal4'),
+      document.getElementById('openModal5'),
+    ].filter(Boolean);
 
-      // добавим тех. поля
-      const payload = {
-        ...data,
-        page: location.href,
-        ts: new Date().toISOString()
-      };
+    const closeModalBg = document.getElementById('closeModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-      try{
-        setLoading(form, true);
-        await sendToSheets(payload);
+    function openModal(){
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
 
-        form.reset();
-        closeModal();
-        showToast('Спасибо! Заявка отправлена ✅');
-      }catch(err){
-        console.error(err);
-        showToast('Ошибка отправки ❌');
-      }finally{
-        setLoading(form, false);
-      }
+    openModalBtns.forEach(btn => btn.addEventListener('click', () => {
+      closeDrawer();
+      openModal();
+    }));
+    closeModalBg && closeModalBg.addEventListener('click', closeModal);
+    closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape'){ closeModal(); closeDrawer(); }
     });
-  }
 
-  const leadForm = document.getElementById('leadForm');
-  const modalForm = document.getElementById('modalForm');
-  if(leadForm) handleSubmit(leadForm);
-  if(modalForm) handleSubmit(modalForm);
-</script>
+    // Toast helper
+    const toast = document.getElementById('toast');
+    function showToast(text){
+      toast.textContent = text || 'Готово ✅';
+      toast.classList.add('show');
+      setTimeout(()=>toast.classList.remove('show'), 2600);
+    }
+
+    // ====== ОТПРАВКА В GOOGLE SHEETS (form-urlencoded, самый надежный) ======
+    function formToUrlEncoded(form){
+      const fd = new FormData(form);
+      fd.append('page', location.href);
+      fd.append('ts', new Date().toISOString());
+      return new URLSearchParams(fd).toString();
+    }
+
+    async function sendToSheets(form){
+      const body = formToUrlEncoded(form);
+
+      // Важно: form-urlencoded почти всегда проходит без CORS preflight
+      const res = await fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body
+      });
+
+      // mode:no-cors => opaque, статус не читается — считаем успехом если fetch не упал
+      return true;
+    }
+
+    function setLoading(form, isLoading){
+      const btn = form.querySelector('button[type="submit"]');
+      if(!btn) return;
+
+      if(isLoading){
+        btn.dataset.oldText = btn.textContent;
+        btn.textContent = "Отправляю...";
+        btn.disabled = true;
+        btn.style.opacity = "0.8";
+      } else {
+        btn.textContent = btn.dataset.oldText || "Отправить заявку";
+        btn.disabled = false;
+        btn.style.opacity = "";
+      }
+    }
+
+    function handleSubmit(form){
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        try{
+          setLoading(form, true);
+          await sendToSheets(form);
+
+          form.reset();
+          closeModal();
+          showToast('Спасибо! Заявка отправлена ✅');
+        }catch(err){
+          console.error(err);
+          showToast('Ошибка отправки ❌');
+        }finally{
+          setLoading(form, false);
+        }
+      });
+    }
+
+    const leadForm = document.getElementById('leadForm');
+    const modalForm = document.getElementById('modalForm');
+    if(leadForm) handleSubmit(leadForm);
+    if(modalForm) handleSubmit(modalForm);
+  </script>
 </body>
 </html>
